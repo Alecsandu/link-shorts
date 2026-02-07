@@ -1,10 +1,11 @@
 header {
-  position: fixed;
+  position: sticky;
   top: 0;
   right: 0;
   left: 0;
   z-index: 15;
   backdrop-filter: blur(2rem);
+  //margin-bottom: 3rem;
 }
 
 .header-container {
@@ -75,4 +76,8 @@ header {
   font-weight: 500;
   line-height: 1.5rem;
   letter-spacing: .2px;
+}
+
+.active {
+  background: crimson;
 }

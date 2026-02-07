@@ -3,7 +3,7 @@
     <div class="header-wrapper">
       <nav class="header-content">
         <!--Brand logo/title-->
-        <a class="site-brand" href="/">
+        <a class="site-brand" routerLink="/">
           <div class="site-brand-logo-container">
             <span class="site-brand-logo">LINK-SHORTS</span>
           </div>
@@ -13,10 +13,11 @@
         <div class="header-nav-tabs">
           <ul class="header-nav-list">
             <li class="header-nav-list-item">
-              <a href="/login">SignIn</a>
+              <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
             </li>
+
             <li class="header-nav-list-item">
-              <a href="/">Home</a>
+              <a routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">SignIn</a>
             </li>
           </ul>
         </div>
