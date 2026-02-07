@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, signal} from '@angular/core';
+import {Component, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
@@ -10,7 +10,7 @@ interface LoginRequest {
 }
 
 interface LoginResponse {
-  message?: string;
+  access_token?: string;
   // Add other response fields your API returns
 }
 
@@ -29,8 +29,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router,
-    private cdr: ChangeDetectorRef
+    private router: Router
   ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.email]],
@@ -41,7 +40,6 @@ export class LoginComponent {
   onSubmit(): void {
     if (this.loginForm.invalid) {
       this.markFormGroupTouched(this.loginForm);
-      this.cdr.markForCheck(); // Manual change detection
       return;
     }
 
@@ -61,7 +59,17 @@ export class LoginComponent {
       next: (response) => {
         console.log('Login successful', response);
 
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/profile']).then(
+          navigated => {
+            if (!navigated) {
+              console.warn('Navigation was blocked or failed');
+              this.errorMessage.set('Could not navigate to profile page.');
+            }
+          }
+        ).catch(error => {
+          console.error('Navigation error:', error);
+          this.errorMessage.set('Navigation failed. Please try again.');
+        });
       },
       error: (error: HttpErrorResponse) => {
         this.isLoading.set(false);
@@ -73,11 +81,9 @@ export class LoginComponent {
           this.errorMessage.set(error.error?.message || 'Login failed. Please try again.');
         }
         console.error('Login error:', error);
-        this.cdr.markForCheck(); // Manual change detection
       },
       complete: () => {
         this.isLoading.set(false);
-        this.cdr.markForCheck(); // Manual change detection
       }
     });
   }

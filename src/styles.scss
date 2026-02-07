@@ -1,4 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  outline: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 html {
   font-family: 'Alegreya', system-ui;
   color-scheme: dark;
@@ -8,4 +16,9 @@ html {
 
 body {
   margin: 0;
+  display: grid;
+}
+
+:root {
+  --color_bg_app_bar: hsla(0, 0%, 7%, 0.66);
 }
