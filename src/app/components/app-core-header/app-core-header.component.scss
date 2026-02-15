@@ -79,5 +79,14 @@ header {
 }
 
 .active {
-  background: crimson;
+  background: cornsilk;
+  color: #181818;
+}
+
+li > a {
+  color: #007bff;
+}
+
+li a:visited {
+  color: #181818;
 }

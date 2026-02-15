@@ -13,12 +13,26 @@
         <div class="header-nav-tabs">
           <ul class="header-nav-list">
             <li class="header-nav-list-item">
-              <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+              <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
             </li>
 
-            <li class="header-nav-list-item">
-              <a routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">SignIn</a>
-            </li>
+            @if (authService.isAuthenticated() | async) {
+              <li class="header-nav-list-item">
+                <a routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Profile</a>
+              </li>
+              <li class="header-nav-list-item">
+                <span>Welcome, {{ (authService.userProfile | async)?.name }}</span>
+              </li>
+
+              <li class="header-nav-list-item">
+                <button (click)="authService.logout()">Logout</button>
+              </li>
+            } @else {
+              <li class="header-nav-list-item">
+                <button (click)="authService.login()">Login with Google</button>
+              </li>
+            }
+
           </ul>
         </div>
       </nav>
