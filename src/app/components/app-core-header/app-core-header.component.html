@@ -16,12 +16,12 @@
               <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
             </li>
 
-            @if (authService.isAuthenticated() | async) {
+            @if (authService.isAuthenticated$ | async) {
               <li class="header-nav-list-item">
                 <a routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Profile</a>
               </li>
               <li class="header-nav-list-item">
-                <span>Welcome, {{ (authService.userProfile | async)?.name }}</span>
+                <span>Welcome, {{ (authService.userProfile$ | async)?.name }}</span>
               </li>
 
               <li class="header-nav-list-item">

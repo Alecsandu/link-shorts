@@ -6,10 +6,12 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class AuthCoreService {
 
-  /*readonly isAuthenticated$ = this.authService.isAuthenticated$;
-  readonly userProfile$ = this.authService.user$;*/
+  readonly isAuthenticated$;
+  readonly userProfile$;
 
   constructor(private authService: AuthService) {
+    this.isAuthenticated$ = this.authService.isAuthenticated$;
+    this.userProfile$ = this.authService.user$;
   }
 
   login() {
@@ -22,14 +24,6 @@ export class AuthCoreService {
         returnTo: window.location.origin
       }
     });
-  }
-
-  isAuthenticated() {
-    return this.authService.isAuthenticated$;
-  }
-
-  get userProfile() {
-    return this.authService.user$;
   }
 
 }

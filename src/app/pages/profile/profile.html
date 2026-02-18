@@ -1,3 +1,11 @@
-<p>profile works!</p>
-
-<button type="button" routerLink="/login">Sign In</button>
+<div>
+  @if (authService.userProfile$ | async; as user) {
+    <ul>
+      @for (item of user | keyvalue; track item.key) {
+        <li>
+          <strong>{{ item.key }}:</strong> {{ item.value }}
+        </li>
+      }
+    </ul>
+  }
+</div>

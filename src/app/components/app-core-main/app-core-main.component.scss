@@ -1,3 +1,9 @@
 main {
   background-color: var(--main-background-color);
+  min-height: 600px;
+}
+
+.center-main {
+  display: flex;
+  justify-content: center;
 }
